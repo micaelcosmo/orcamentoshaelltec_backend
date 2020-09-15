@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "e85a4375-1866-40ce-8c0a-3b5f52fd1a0d",
+		"name": "orcamentoshaelltec_postman_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post BackEnd Orçamentos Haelltec",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "sTogb9YQDma3rmoZKyafyrceLiUxb5hr8bM+lf6b",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "AKIAZP7HS7EX46DK72KO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://lz8t36rcha.execute-api.sa-east-1.amazonaws.com/api/orcamento",
+					"protocol": "https",
+					"host": [
+						"lz8t36rcha",
+						"execute-api",
+						"sa-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"orcamento"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
