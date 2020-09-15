@@ -1,28 +1,29 @@
 import boto3
 from botocore.exceptions import ClientError
 
+
 class EmailSender:
 
     def enviar_email(self, orcamento):
 
-        SENDER = "HaellTec <haelltec@gmail.com>"
+        sender = "HaellTec <haelltec@gmail.com>"
 
-        RECIPIENT = orcamento.email
+        recipient = orcamento.email
 
-        AWS_REGION = "sa-east-1"
+        aws_region = "sa-east-1"
 
-        SUBJECT = "Resposta de orçamento HaellTec."
+        subject = "Resposta de orçamento HaellTec."
 
         # The email body for recipients with non-HTML email clients.
-        BODY_TEXT = ("orcamento. \nitem 1 \t {{orcamento.}}")
+        body_text = "orcamento. \nitem 1 \t {{orcamento.}}"
 
-        BODY_HTML = self.ler_template(orcamento)
+        body_html = self.ler_template(orcamento)
 
         # The character encoding for the email.
-        CHARSET = "UTF-8"
+        charset = "UTF-8"
 
         # Create a new SES resource and specify a region.
-        client = boto3.client('ses', region_name=AWS_REGION)
+        client = boto3.client('ses', region_name=aws_region)
 
         # Try to send the email.
         try:
@@ -30,27 +31,27 @@ class EmailSender:
             response = client.send_email(
                 Destination={
                     'ToAddresses': [
-                        RECIPIENT,
-                        #TODO adicionar atendentes
+                        recipient,
+                        # TODO adicionar atendentes
                     ],
                 },
                 Message={
                     'Body': {
                         'Html': {
-                            'Charset': CHARSET,
-                            'Data': BODY_HTML,
+                            'Charset': charset,
+                            'Data': body_html,
                         },
                         'Text': {
-                            'Charset': CHARSET,
-                            'Data': BODY_TEXT,
+                            'Charset': charset,
+                            'Data': body_text,
                         },
                     },
                     'Subject': {
-                        'Charset': CHARSET,
-                        'Data': SUBJECT,
+                        'Charset': charset,
+                        'Data': subject,
                     },
                 },
-                Source=SENDER,
+                Source=sender,
             )
         # Display an error if something goes wrong.
         except ClientError as e:
@@ -59,8 +60,7 @@ class EmailSender:
             print("Email sent! Message ID:"),
             print(response['MessageId'])
 
-    def ler_template(orcamento):
-        #implementa logica de leitura do template
-        #substituir valores pelos reais (replace)
+    def ler_template(self, orcamento: object) -> str:
+        # implementa logica de leitura do template
+        # substituir valores pelos reais (replace)
         pass
-
