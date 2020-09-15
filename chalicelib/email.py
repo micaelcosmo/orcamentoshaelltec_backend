@@ -3,46 +3,20 @@ from botocore.exceptions import ClientError
 
 class EmailSender:
 
-    def enviar_email(orcamento):
+    def enviar_email(self, orcamento):
 
-        # Replace sender@example.com with your "From" address.
-        # This address must be verified with Amazon SES.
-        SENDER = "Sender Name <sender@example.com>"
+        SENDER = "HaellTec <haelltec@gmail.com>"
 
-        # Replace recipient@example.com with a "To" address. If your account
-        # is still in the sandbox, this address must be verified.
-        RECIPIENT = "recipient@example.com"
+        RECIPIENT = orcamento.email
 
-        # Specify a configuration set. If you do not want to use a configuration
-        # set, comment the following variable, and the
-        # ConfigurationSetName=CONFIGURATION_SET argument below.
-        CONFIGURATION_SET = "ConfigSet"
+        AWS_REGION = "sa-east-1"
 
-        # If necessary, replace us-west-2 with the AWS Region you're using for Amazon SES.
-        AWS_REGION = "us-west-2"
-
-        # The subject line for the email.
-        SUBJECT = "Amazon SES Test (SDK for Python)"
+        SUBJECT = "Resposta de orçamento HaellTec."
 
         # The email body for recipients with non-HTML email clients.
-        BODY_TEXT = ("Amazon SES Test (Python)\r\n"
-                     "This email was sent with Amazon SES using the "
-                     "AWS SDK for Python (Boto)."
-                     )
+        BODY_TEXT = ("orcamento. \nitem 1 \t {{orcamento.}}")
 
-        # The HTML body of the email.
-        # carregar do html
-        BODY_HTML = """<html>
-        <head></head>
-        <body>
-          <h1>Amazon SES Test (SDK for Python)</h1>
-          <p>This email was sent with
-            <a href='https://aws.amazon.com/ses/'>Amazon SES</a> using the
-            <a href='https://aws.amazon.com/sdk-for-python/'>
-              AWS SDK for Python (Boto)</a>.</p>
-        </body>
-        </html>
-                    """
+        BODY_HTML = self.ler_template(orcamento)
 
         # The character encoding for the email.
         CHARSET = "UTF-8"
@@ -57,6 +31,7 @@ class EmailSender:
                 Destination={
                     'ToAddresses': [
                         RECIPIENT,
+                        #TODO adicionar atendentes
                     ],
                 },
                 Message={
@@ -76,9 +51,6 @@ class EmailSender:
                     },
                 },
                 Source=SENDER,
-                # If you are not using a configuration set, comment or delete the
-                # following line
-                ConfigurationSetName=CONFIGURATION_SET,
             )
         # Display an error if something goes wrong.
         except ClientError as e:
@@ -86,3 +58,9 @@ class EmailSender:
         else:
             print("Email sent! Message ID:"),
             print(response['MessageId'])
+
+    def ler_template(orcamento):
+        #implementa logica de leitura do template
+        #substituir valores pelos reais (replace)
+        pass
+
