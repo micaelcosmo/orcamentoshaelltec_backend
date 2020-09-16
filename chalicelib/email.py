@@ -1,5 +1,24 @@
+from __future__ import with_statement
+
 import boto3
 from botocore.exceptions import ClientError
+
+
+def ler_template(orcamento: object) -> str:
+    result = ''
+    try:
+        with open ('orcamento_email_template.html') as template:
+            result = template.read()
+    except EnvironmentError as e:
+        print('Erro ao abrir template de email')
+        print(e)
+
+    return preencher_template(result, orcamento)
+
+
+def preencher_template(template: str, orcamento: object) -> str:
+    # Substituir o template pelo dado recebido.
+    return template
 
 
 class EmailSender:
@@ -17,7 +36,7 @@ class EmailSender:
         # The email body for recipients with non-HTML email clients.
         body_text = "orcamento. \nitem 1 \t {{orcamento.}}"
 
-        body_html = self.ler_template(orcamento)
+        body_html = ler_template(orcamento)
 
         # The character encoding for the email.
         charset = "UTF-8"
@@ -60,7 +79,3 @@ class EmailSender:
             print("Email sent! Message ID:"),
             print(response['MessageId'])
 
-    def ler_template(self, orcamento: object) -> str:
-        # implementa logica de leitura do template
-        # substituir valores pelos reais (replace)
-        pass
