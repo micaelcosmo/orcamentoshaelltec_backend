@@ -24,11 +24,6 @@ def salvar_orcamento(orcamento):
         print(e, "Erro ao salvar orçamento")
 
 
-def montar_email():
-# ler o template.html e carregar na variavel
-# substituir as variaveis (replace)
-# retornar string email com os valores substituidos
-    return
 
 def guarda_banco():
     return
