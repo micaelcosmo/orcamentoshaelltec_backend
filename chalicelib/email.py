@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 def ler_template(orcamento: object) -> str:
     result = ''
     try:
-        with open ('orcamento_email_template.html') as template:
+        with open('orcamento_email_template.html') as template:
             result = template.read()
     except EnvironmentError as e:
         print('Erro ao abrir template de email')
@@ -78,4 +78,3 @@ class EmailSender:
         else:
             print("Email sent! Message ID:"),
             print(response['MessageId'])
-
