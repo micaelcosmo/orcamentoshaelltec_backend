@@ -33,10 +33,16 @@ def prencher_template(template: str, orcamento: dict) -> str:
 
 
 def now():
-    return datetime.utcnow().strftime('%d/%m/%Y %H:%M')
+    return datetime.now().astimezone(timezone(timedelta(hours=-3)))
+
+
+def agora() -> str:
+    return now().strftime('%d/%m/%Y %H:%M')
 
 
 class EmailSender:
+
+    agora = agora()
 
     def enviar_email(self, orcamento: dict) -> dict:
 
@@ -68,6 +74,9 @@ class EmailSender:
                         recipient,
                         # TODO adicionar atendentes
                     ],
+                    'CcAddresses': [
+                        sender,
+                    ]
                 },
                 Message={
                     'Body': {
