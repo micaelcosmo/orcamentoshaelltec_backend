@@ -3,6 +3,7 @@
   "app_name": "orcamentoshaelltec",
   "stages": {
     "dev": {
+      "autogen_policy": false,
       "api_gateway_stage": "api"
     }
   }
