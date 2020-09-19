@@ -4,3 +4,4 @@
 venv
 __pycache__
 .chalice/deployed
+postman.collection
