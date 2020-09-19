@@ -17,8 +17,18 @@ def ler_template(orcamento: dict) -> str:
 
 
 def preencher_template(template: str, orcamento: dict) -> str:
-    # Substituir o template pelo dado recebido.
-    return template
+    return template \
+        .replace("{{email}}", orcamento['email']) \
+        .replace("{{data}}", now()) \
+        .replace("{{notebooks}}", str(orcamento['notebooks'])) \
+        .replace("{{desktops}}", str(orcamento['desktops'])) \
+        .replace("{{cobertura}}", str(orcamento['cobertura'])) \
+        .replace("{{velocidade}}", str(orcamento['velocidade'])) \
+        .replace("{{total}}", str(orcamento['total']))
+
+
+def now():
+    return date.today().strftime('%m/%d/%Y %h:%M')
 
 
 class EmailSender:
@@ -34,7 +44,7 @@ class EmailSender:
         subject = "Resposta de orçamento HaellTec."
 
         # The email body for recipients with non-HTML email clients.
-        body_text = "orcamento. \nitem 1 \t {{orcamento.}}"
+        body_text = "orcamento"
 
         body_html = ler_template(orcamento)
 
