@@ -4,10 +4,10 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-def ler_template(orcamento: object) -> str:
+def ler_template(orcamento: dict) -> str:
     result = ''
     try:
-        with open('orcamento_email_template.html') as template:
+        with open('chalicelib/orcamento_email_template.html') as template:
             result = template.read()
     except EnvironmentError as e:
         print('Erro ao abrir template de email')
@@ -16,18 +16,18 @@ def ler_template(orcamento: object) -> str:
     return preencher_template(result, orcamento)
 
 
-def preencher_template(template: str, orcamento: object) -> str:
+def preencher_template(template: str, orcamento: dict) -> str:
     # Substituir o template pelo dado recebido.
     return template
 
 
 class EmailSender:
 
-    def enviar_email(self, orcamento):
+    def enviar_email(self, orcamento: dict) -> dict:
 
-        sender = "HaellTec <haelltec@gmail.com>"
+        sender = "HaellTec Developer <micael.trabalho@hotmail.com>"
 
-        recipient = orcamento.email
+        recipient = orcamento['email']
 
         aws_region = "sa-east-1"
 
@@ -47,7 +47,7 @@ class EmailSender:
         # Try to send the email.
         try:
             # Provide the contents of the email.
-            response = client.send_email(
+            return client.send_email(
                 Destination={
                     'ToAddresses': [
                         recipient,
