@@ -3,6 +3,8 @@ from __future__ import with_statement
 import boto3
 from botocore.exceptions import ClientError
 
+from datetime import date
+
 
 def ler_template(orcamento: dict) -> str:
     result = ''
