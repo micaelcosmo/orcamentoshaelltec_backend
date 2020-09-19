@@ -3,7 +3,7 @@ from __future__ import with_statement
 import boto3
 from botocore.exceptions import ClientError
 
-from datetime import date
+from datetime import datetime
 
 
 def ler_template(orcamento: dict) -> str:
@@ -30,7 +30,7 @@ def preencher_template(template: str, orcamento: dict) -> str:
 
 
 def now():
-    return date.today().strftime('%m/%d/%Y %h:%M')
+    return datetime.utcnow().strftime('%d/%m/%Y %H:%M')
 
 
 class EmailSender:
