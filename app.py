@@ -6,7 +6,7 @@ from chalicelib.email import EmailSender
 app = Chalice(app_name='orcamentoshaelltec')
 
 
-@app.route('/orcamento', methods=['POST'])
+@app.route('/orcamento', methods=['POST'], cors=True)
 def solicitar_orcamento():
     orcamento = app.current_request.json_body
     response = {}
