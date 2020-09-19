@@ -12,12 +12,19 @@ def solicitar_orcamento():
     response = {}
     try:
         calcular_valor_total(orcamento)
+        orcamento = obter_consultor_disponivel(orcamento)
         response = enviar(orcamento)
         response = salvar(orcamento)
     except Exception as e:
         print('Erro desconhecido, solicitanto orçamento.')
         print(e)
     return response
+
+
+def obter_consultor_disponivel(orcamento):
+    orcamento['consultor'] = 'Micael M A Cosmo'
+    return orcamento
+#   TODO obter consultor que tiver disponível
 
 
 def calcular_valor_total(orcamento):

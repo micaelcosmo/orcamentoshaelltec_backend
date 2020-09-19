@@ -29,7 +29,8 @@ def prencher_template(template: str, orcamento: dict) -> str:
         .replace("{{desktops}}", str(orcamento['desktops'])) \
         .replace("{{cobertura}}", str(orcamento['cobertura'])) \
         .replace("{{velocidade}}", str(orcamento['velocidade'])) \
-        .replace("{{total}}", str(orcamento['total']))
+        .replace("{{total}}", str(orcamento['total']))\
+        .replace("{{consultor}}", orcamento['consultor'])
 
 
 def now():
