@@ -21,16 +21,22 @@ def solicitar_orcamento():
 
 
 def calcular_valor_total(orcamento):
-    orcamento['total'] = calcular(orcamento)
+    orcamento['total'] = str(":.2f".format(calcular(orcamento)))
     return orcamento
 
 
 def salvar(orcamento):
     try:
-        print(orcamento)
+        return {
+            "ResponseMetadata": dict(HTTPStatusCode=200, orcamento=orcamento)
+        }
+
     # TODO guarda orcamento com status solicitada
     except Exception as e:
         print(e, "Erro ao salvar orçamento")
+        return {
+            "ResponseMetadata": dict(HTTPStatusCode=500)
+        }
 
 
 def guarda_banco():
