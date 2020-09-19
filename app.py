@@ -21,7 +21,7 @@ def solicitar_orcamento():
 
 
 def calcular_valor_total(orcamento):
-    orcamento['total'] = "%.2f" % calcular(orcamento)
+    orcamento['total'] = "{:.2f}" % calcular(orcamento)
     return orcamento
 
 
