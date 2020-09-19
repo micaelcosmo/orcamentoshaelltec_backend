@@ -13,8 +13,7 @@ def solicitar_orcamento():
     try:
         calcular_valor_total(orcamento)
         response = enviar(orcamento)
-        print(response)
-        salvar(orcamento)
+        response = salvar(orcamento)
     except Exception as e:
         print('Erro desconhecido, solicitanto orçamento.')
         print(e)
