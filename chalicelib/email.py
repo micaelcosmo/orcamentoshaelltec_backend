@@ -87,3 +87,8 @@ class EmailSender:
         # Display an error if something goes wrong.
         except ClientError as e:
             print(e.response['Error']['Message'])
+            return {
+                "ResponseMetadata": {
+                    "HTTPStatusCode": 500,
+                }
+            }
