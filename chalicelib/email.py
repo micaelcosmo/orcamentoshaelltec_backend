@@ -3,25 +3,28 @@ from __future__ import with_statement
 import boto3
 from botocore.exceptions import ClientError
 
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 
 def ler_template(orcamento: dict) -> str:
-    result = ''
     try:
         with open('chalicelib/orcamento_email_template.html') as template:
             result = template.read()
+        return prencher_template(result, orcamento)
     except EnvironmentError as e:
         print('Erro ao abrir template de email')
         print(e)
+        return {
+            "ResponseMetadata": {
+                "HTTPStatusCode": 500,
+            }
+        }
 
-    return preencher_template(result, orcamento)
 
-
-def preencher_template(template: str, orcamento: dict) -> str:
+def prencher_template(template: str, orcamento: dict) -> str:
     return template \
         .replace("{{email}}", orcamento['email']) \
-        .replace("{{data}}", now()) \
+        .replace("{{data}}", agora()) \
         .replace("{{notebooks}}", str(orcamento['notebooks'])) \
         .replace("{{desktops}}", str(orcamento['desktops'])) \
         .replace("{{cobertura}}", str(orcamento['cobertura'])) \
